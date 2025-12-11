@@ -1,8 +1,9 @@
 package com.alicorp.dao;
-import com.alicorp.model.pedido;
 import java.sql.SQLException;
 
-public class pedidoDAO {
+import com.alicorp.model.pedido;
+
+public interface pedidoDAO {
     // Método que gestiona la transacción completa: insertar cabecera, detalles y actualizar stock.
     void guardarPedidoTransaccional(pedido pedido) throws SQLException;
     
