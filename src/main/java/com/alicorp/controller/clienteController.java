@@ -1,9 +1,10 @@
 package com.alicorp.controller;
-import com.alicorp.service.clienteService;
-import com.alicorp.model.cliente;
-import com.alicorp.view.clienteView;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+
+import com.alicorp.model.cliente;
+import com.alicorp.service.clienteService;
+import com.alicorp.view.clienteView;
 public class clienteController implements ActionListener{
     private clienteView vista;
     private clienteService modelo;
@@ -16,10 +17,10 @@ public class clienteController implements ActionListener{
     public void actionPerformed(ActionEvent e) {
         String nombre = this.vista.txtNombre.getText();
         String ruc = this.vista.txtRuc.getText();
-        String direccion = this.vista.txtDireccion.getText();
-        String email = this.vista.txtEmail.getText();
+        String direccion = "N/A";
+        String email = "N/A";
         try {
-            cliente c = new cliente(nombre, ruc, direccion, email);
+            cliente c = new cliente(0, nombre, ruc, direccion, email);
             this.modelo.registrarcliente(c);
         } catch (Exception ex) {
             System.out.println(ex.getMessage());

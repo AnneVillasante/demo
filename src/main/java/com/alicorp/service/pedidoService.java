@@ -13,7 +13,7 @@ public class pedidoService {
 
     public void registrarPedido(pedido pedido) throws Exception {
         // 1. Validar Stock de cada producto antes de vender
-        for (detallePedido det : pedido.getDetalles()) {
+        for (detallePedido det : pedido.getdetalles()) {
             producto p = productoDAO.obtenerPorId(det.getIdproducto());
             if (p == null) {
                 throw new Exception("producto no existe: ID " + det.getIdproducto());

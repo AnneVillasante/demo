@@ -4,7 +4,7 @@ import com.alicorp.model.detallePedido;
 import com.alicorp.util.conexionDB;
 import java.sql.*;
 
-public class pedidoDAOImpl implements pedidoDAO{
+public class pedidoDAOImpl implements pedidoDAO {
     public void guardarPedidoTransaccional(pedido pedido) throws SQLException {
         Connection con = null;
         try {
@@ -33,7 +33,7 @@ public class pedidoDAOImpl implements pedidoDAO{
             PreparedStatement psDet = con.prepareStatement(sqlDetalle);
             PreparedStatement psStock = con.prepareStatement(sqlUpdateStock);
 
-            for (detallePedido det : pedido.getDetalles()) {
+            for (detallePedido det : pedido.getdetalles()) {
                 // Insertar detalle
                 psDet.setInt(1, idPedidoGenerado);
                 psDet.setInt(2, det.getIdproducto());
