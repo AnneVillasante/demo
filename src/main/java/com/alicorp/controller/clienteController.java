@@ -10,16 +10,16 @@ public class clienteController implements ActionListener{
     public clienteController(clienteView vista) {
         this.vista = vista;
         this.modelo = new clienteService();
-        this.vista.btnGuardar().addActionListener(this);
+        this.vista.btnGuardar.addActionListener(this);
     }
     @Override
     public void actionPerformed(ActionEvent e) {
-        String nombre = this.vista.txtNombre().getText();
-        String ruc = this.vista.txtRuc().getText();
-        String direccion = this.vista.txtDireccion().getText();
-        String email = this.vista.txtEmail().getText();
+        String nombre = this.vista.txtNombre.getText();
+        String ruc = this.vista.txtRuc.getText();
+        String direccion = this.vista.txtDireccion.getText();
+        String email = this.vista.txtEmail.getText();
         try {
-            cliente c = new cliente(idcliente, nombre, ruc, direccion, email);
+            cliente c = new cliente(nombre, ruc, direccion, email);
             this.modelo.registrarcliente(c);
         } catch (Exception ex) {
             System.out.println(ex.getMessage());

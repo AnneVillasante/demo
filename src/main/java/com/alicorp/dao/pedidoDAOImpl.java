@@ -16,7 +16,7 @@ public class pedidoDAOImpl implements pedidoDAO{
             String sqlCabecera = "INSERT INTO Pedido (fecha, total, idCliente) VALUES (NOW(), ?, ?)";
             PreparedStatement psCab = con.prepareStatement(sqlCabecera, Statement.RETURN_GENERATED_KEYS);
             psCab.setDouble(1, pedido.getTotal());
-            psCab.setInt(2, pedido.getIdCliente()); // Asumiendo que ya seteas el cliente
+            psCab.setInt(2, pedido.getIdcliente()); // Asumiendo que ya seteas el cliente
             psCab.executeUpdate();
 
             // Obtener el ID generado del Pedido

@@ -2,8 +2,6 @@ package com.alicorp.model;
 import java.sql.Date;
 import java.util.ArrayList;
 import java.util.List;
-import .util.ArrayList;
-import .util.List;
 
 public class pedido {
     private int idPedido;
