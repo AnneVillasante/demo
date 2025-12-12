@@ -1,4 +1,5 @@
 package com.alicorp.model;
+import java.util.Date;
 
 public class ordenProduccion {
     private int idOrden;

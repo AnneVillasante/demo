@@ -12,7 +12,7 @@ public class loginController implements ActionListener {
     private loginView loginView;
     private usuarioService userService;
 
-    public LoginController(LoginView loginView) {
+    public loginController(loginView loginView) {
         this.loginView = loginView;
         this.userService = new usuarioService();
         this.loginView.btnIngresar.addActionListener(this);
@@ -32,7 +32,7 @@ public class loginController implements ActionListener {
                 loginView.dispose(); 
                 
                 // Abre el Dashboard principal con el rol del usuario (RBAC)
-                new MainView(user.getRol()); 
+                new mainView(user.getRol()); 
             }
         } catch (Exception ex) {
             JOptionPane.showMessageDialog(loginView, ex.getMessage(), "Error de Autenticación", JOptionPane.ERROR_MESSAGE);

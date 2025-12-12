@@ -97,13 +97,17 @@ public class mainView extends JFrame implements ActionListener {
             case "item.clientes":
                 new clienteView().setVisible(true);
                 break;
+            case "item.pedidos":
+                new pedidoView().setVisible(true); // Abre Pedidos
+                break;
             case "item.produccion":
-                // Se asume que has implementado ProduccionView
-                // new ProduccionView().setVisible(true); 
-                JOptionPane.showMessageDialog(this, "Módulo de Producción en desarrollo.");
+                new produccionView().setVisible(true); // Abre Producción
+                break;
+            case "item.reporte_kpi":
+                new reporteKPIView().setVisible(true); // Abre Reporte KPI
                 break;
             case "item.reporte_rsu":
-                new reportesRSUView().setVisible(true);
+                new reportesRSUView().setVisible(true); // Abre Reporte RSU
                 break;
             case "item.evidencias_rsu":
                 abrirEvidenciasRSU(); // Llama a la función para RSU documental
