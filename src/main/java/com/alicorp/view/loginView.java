@@ -6,8 +6,10 @@ import java.util.ResourceBundle;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JPanel;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
+import javax.swing.border.EmptyBorder;
 
 public class loginView extends JFrame{
     public JTextField txtUsuario;
@@ -20,6 +22,9 @@ public class loginView extends JFrame{
         setSize(350, 200);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setLayout(new GridLayout(3, 2, 10, 10));
+        
+        // Margen interno para que no se vea pegado a los bordes
+        ((JPanel)getContentPane()).setBorder(new EmptyBorder(20, 20, 20, 20));
         setLocationRelativeTo(null); 
 
         JLabel lblUsuario = new JLabel(bundle.getString("lbl.usuario"));

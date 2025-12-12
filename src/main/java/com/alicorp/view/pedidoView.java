@@ -1,14 +1,17 @@
 package com.alicorp.view;
-import java.awt.FlowLayout;
+import java.awt.BorderLayout;
+import java.awt.GridLayout;
 import java.util.Locale;
 import java.util.ResourceBundle;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
+import javax.swing.border.EmptyBorder;
 
 public class pedidoView extends JFrame{
     public JTextField txtIdcliente, txtIdproducto, txtCantidad;
@@ -20,7 +23,9 @@ public class pedidoView extends JFrame{
     public pedidoView() {
         setTitle(bundle.getString("window.pedido.title")); // "Gestión de Pedidos"
         setSize(500, 400);
-        setLayout(new FlowLayout());
+        setLayout(new BorderLayout(10, 10));
+        
+        ((JPanel)getContentPane()).setBorder(new EmptyBorder(15, 15, 15, 15));
 
         // Campos RSU: Etiquetas traducidas y descripciones accesibles
         JLabel lblProd = new JLabel(bundle.getString("lbl.producto")); // "ID Producto:"
@@ -39,12 +44,16 @@ public class pedidoView extends JFrame{
         txtAreaDetalle = new JTextArea(10, 40);
         txtAreaDetalle.setEditable(false);
 
-        // Agregar componentes
-        add(lblProd); add(txtIdproducto);
-        add(lblCant); add(txtCantidad);
-        add(btnAgregar);
-        add(new JScrollPane(txtAreaDetalle));
-        add(btnFinalizar);
+        // Panel Superior (Formulario)
+        JPanel panelForm = new JPanel(new GridLayout(3, 2, 5, 5));
+        panelForm.add(lblProd); panelForm.add(txtIdproducto);
+        panelForm.add(lblCant); panelForm.add(txtCantidad);
+        panelForm.add(new JLabel("")); panelForm.add(btnAgregar);
+        
+        // Agregar componentes al Layout Principal
+        add(panelForm, BorderLayout.NORTH);
+        add(new JScrollPane(txtAreaDetalle), BorderLayout.CENTER);
+        add(btnFinalizar, BorderLayout.SOUTH);
         
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     }

@@ -9,6 +9,11 @@ import com.alicorp.view.loginView; // NUEVO
 
 public class Main {
     public static void main(String[] args) {
+        try {
+            UIManager.setLookAndFeel("javax.swing.plaf.nimbus.NimbusLookAndFeel");
+        } catch (Exception e) {
+            System.out.println("No se pudo aplicar el tema Nimbus");
+        }
         // RSU: Accesibilidad Visual
         // Aumentar el tamaño de fuente global para personas con dificultad visual
         UIManager.put("Label.font", new Font("Arial", Font.BOLD, 14));

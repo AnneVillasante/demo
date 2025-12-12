@@ -6,7 +6,9 @@ import java.util.ResourceBundle;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JPanel;
 import javax.swing.JTextField;
+import javax.swing.border.EmptyBorder;
 
 public class produccionView extends JFrame {
     public JTextField txtIdProducto, txtCantidad, txtCodLote, txtFechaVencimiento;
@@ -18,6 +20,9 @@ public class produccionView extends JFrame {
         setSize(450, 300);
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         setLayout(new GridLayout(5, 2, 10, 10));
+        
+        // Margen interno
+        ((JPanel)getContentPane()).setBorder(new EmptyBorder(20, 20, 20, 20));
         setLocationRelativeTo(null);
         
         // Componentes de la Orden de Producción

@@ -6,8 +6,10 @@ import java.util.ResourceBundle;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
+import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
+import javax.swing.border.EmptyBorder;
 
 public class reportesRSUView extends JFrame{
     private ResourceBundle bundle = ResourceBundle.getBundle("messages", Locale.getDefault());
@@ -17,6 +19,9 @@ public class reportesRSUView extends JFrame{
         setTitle(bundle.getString("window.reporte_rsu.title")); 
         setSize(500, 400);
         setLayout(new BorderLayout());
+        
+        // Margen interno
+        ((JPanel)getContentPane()).setBorder(new EmptyBorder(15, 15, 15, 15));
         
         JTextArea areaReporte = new JTextArea();
         areaReporte.setEditable(false);

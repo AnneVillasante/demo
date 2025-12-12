@@ -6,7 +6,9 @@ import java.util.ResourceBundle;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JPanel;
 import javax.swing.JTextField;
+import javax.swing.border.EmptyBorder;
 public class clienteView extends JFrame{
     public JTextField txtNombre;
     public JTextField txtRuc;
@@ -20,6 +22,9 @@ public class clienteView extends JFrame{
         setSize(400, 300);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setLayout(new GridLayout(4, 2, 10, 10)); // Diseño simple tipo rejilla
+        
+        // Margen interno
+        ((JPanel)getContentPane()).setBorder(new EmptyBorder(20, 20, 20, 20));
 
         // Inicializar componentes con RSU
         inicializarComponentes();

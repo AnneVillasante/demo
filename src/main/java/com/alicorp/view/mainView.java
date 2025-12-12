@@ -1,4 +1,5 @@
 package com.alicorp.view;
+import java.awt.BorderLayout;
 import java.awt.Desktop;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -7,10 +8,12 @@ import java.util.Locale;
 import java.util.ResourceBundle;
 
 import javax.swing.JFrame;
+import javax.swing.JLabel;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 import javax.swing.JOptionPane;
+import javax.swing.SwingConstants;
 
 import com.alicorp.controller.clienteController;
 
@@ -28,6 +31,10 @@ public class mainView extends JFrame implements ActionListener {
         setSize(800, 600);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setLocationRelativeTo(null);
+        setLayout(new BorderLayout());
+        
+        // Mensaje de bienvenida en el centro
+        add(new JLabel("<html><h1>Bienvenido al Sistema de Gestión Alicorp</h1><p align='center'>Seleccione una opción del menú para comenzar.</p></html>", SwingConstants.CENTER), BorderLayout.CENTER);
         
         crearMenu();
         aplicarControlDeAcceso(); // CRÍTICO: Control de Acceso basado en Roles (RBAC)
