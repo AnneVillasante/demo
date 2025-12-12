@@ -20,5 +20,5 @@ public class Main {
         clienteController controlador = new clienteController(vista); // El controlador escucha a la vista
         
         vista.setVisible(true);
-    }
+    }   
 }
