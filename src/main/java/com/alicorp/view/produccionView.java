@@ -1,10 +1,14 @@
 package com.alicorp.view;
-import javax.swing.*;
-import java.awt.*;
+import java.awt.GridLayout;
 import java.util.Locale;
 import java.util.ResourceBundle;
 
-public class produccionView {
+import javax.swing.JButton;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JTextField;
+
+public class produccionView extends JFrame {
     public JTextField txtIdProducto, txtCantidad, txtCodLote, txtFechaVencimiento;
     public JButton btnFinalizarProduccion;
     private ResourceBundle bundle = ResourceBundle.getBundle("messages", Locale.getDefault());

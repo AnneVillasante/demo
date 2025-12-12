@@ -12,6 +12,8 @@ import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 import javax.swing.JOptionPane;
 
+import com.alicorp.controller.clienteController;
+
 public class mainView extends JFrame implements ActionListener {
     private JMenuBar menuBar;
     private JMenu menuGestion, menuOperaciones, menuReportes, menuAyuda;
@@ -95,7 +97,9 @@ public class mainView extends JFrame implements ActionListener {
         String command = e.getActionCommand();
         switch (command) {
             case "item.clientes":
-                new clienteView().setVisible(true);
+                clienteView vistaC = new clienteView();
+                new clienteController(vistaC); // Conecta el controlador para que funcione el botón Guardar
+                vistaC.setVisible(true);
                 break;
             case "item.pedidos":
                 new pedidoView().setVisible(true); // Abre Pedidos

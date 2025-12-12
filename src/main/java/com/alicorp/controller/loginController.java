@@ -1,12 +1,13 @@
 package com.alicorp.controller;
-import com.alicorp.service.usuarioService;
-import com.alicorp.model.usuario;
-import com.alicorp.view.loginView;
-import com.alicorp.view.mainView; // Necesitas crear esta clase
-
-import javax.swing.JOptionPane;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+
+import javax.swing.JOptionPane;
+
+import com.alicorp.model.usuario; // Necesitas crear esta clase
+import com.alicorp.service.usuarioService;
+import com.alicorp.view.loginView;
+import com.alicorp.view.mainView;
 
 public class loginController implements ActionListener {
     private loginView loginView;
@@ -26,7 +27,7 @@ public class loginController implements ActionListener {
         try {
             usuario user = userService.autenticar(username, password);
             if (user != null) {
-                JOptionPane.showMessageDialog(loginView, "Bienvenido, " + user.getNombre() + " (" + user.getRol() + ")", "Ingreso Exitoso", JOptionPane.INFORMATION_MESSAGE);
+                JOptionPane.showMessageDialog(loginView, "Bienvenido, " + user.getUsername() + " (" + user.getRol() + ")", "Ingreso Exitoso", JOptionPane.INFORMATION_MESSAGE);
                 
                 // Cierra la ventana de Login
                 loginView.dispose(); 
