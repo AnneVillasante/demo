@@ -1,12 +1,14 @@
 package com.alicorp.view;
 import java.awt.BorderLayout;
 import java.awt.Desktop;
+import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
 import java.util.Locale;
 import java.util.ResourceBundle;
 
+import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JMenu;
@@ -38,7 +40,13 @@ public class mainView extends JFrame implements ActionListener {
         
         crearMenu();
         aplicarControlDeAcceso(); // CRÍTICO: Control de Acceso basado en Roles (RBAC)
-        
+        // RSU CRÍTICO: Agregar Ícono de Ventana (Logo en barra de tareas)
+        try {
+            Image icon = new ImageIcon(getClass().getResource("/images/alicorp_logo_icon.png")).getImage();
+            this.setIconImage(icon);
+        } catch (Exception ex) {
+            System.err.println("Advertencia: No se pudo cargar el ícono de la ventana.");
+        }
         setVisible(true);
     }
     
