@@ -1,8 +1,13 @@
 package com.alicorp.dao;
-import com.alicorp.model.pedido;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
+
 import com.alicorp.model.detallePedido;
+import com.alicorp.model.pedido;
 import com.alicorp.util.conexionDB;
-import java.sql.*;
 
 public class pedidoDAOImpl implements pedidoDAO {
     public void guardarPedidoTransaccional(pedido pedido) throws SQLException {
@@ -27,8 +32,8 @@ public class pedidoDAOImpl implements pedidoDAO {
             }
 
             // B. Insertar Detalles y Actualizar Stock
-            String sqlDetalle = "INSERT INTO detallePedido (idPedido, idProducto, cantidad, precioUnitario) VALUES (?,?,?,?)";
-            String sqlUpdateStock = "UPDATE producto SET stock = stock - ? WHERE idProducto = ?";
+            String sqlDetalle = "INSERT INTO DetallePedido (idPedido, idProducto, cantidad, precioUnitario) VALUES (?,?,?,?)";
+            String sqlUpdateStock = "UPDATE Producto SET stock = stock - ? WHERE idProducto = ?";
             
             PreparedStatement psDet = con.prepareStatement(sqlDetalle);
             PreparedStatement psStock = con.prepareStatement(sqlUpdateStock);

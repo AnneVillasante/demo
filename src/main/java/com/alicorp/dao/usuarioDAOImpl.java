@@ -13,8 +13,8 @@ public class usuarioDAOImpl implements usuarioDAO {
     @Override
     public usuario login(String username, String password) {
         usuario u = null;
-        // Se asume que la tabla se llama 'usuario' y tiene columnas username, password y rol
-        String sql = "SELECT * FROM usuario WHERE username = ? AND password = ?";
+        // Corrección: Tabla Usuario, columnas nombre y clave según database.sql
+        String sql = "SELECT * FROM Usuario WHERE nombre = ? AND clave = ?";
         
         try (Connection con = conexionDB.conectar();
              PreparedStatement ps = con.prepareStatement(sql)) {
@@ -25,9 +25,9 @@ public class usuarioDAOImpl implements usuarioDAO {
             ResultSet rs = ps.executeQuery();
             if (rs.next()) {
                 u = new usuario(
-                    rs.getInt("idusuario"),
-                    rs.getString("username"),
-                    rs.getString("password"),
+                    rs.getInt("idUsuario"),
+                    rs.getString("nombre"),
+                    rs.getString("clave"),
                     rs.getString("rol")
                 );
             }

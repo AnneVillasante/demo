@@ -11,21 +11,21 @@ import com.alicorp.util.conexionDB;
 public class clienteDAOImpl implements clienteDAO {
     @Override
     public void registrar(cliente c) {
-        String sql = "INSERT INTO cliente (idcliente, nombre, ruc, direccion, email) VALUES (?,?,?,?,?)";
+        // Corrección: Tabla Cliente y se omite idcliente (es AUTO_INCREMENT)
+        String sql = "INSERT INTO Cliente (nombre, ruc, direccion, email) VALUES (?,?,?,?)";
         try (Connection con = conexionDB.conectar(); 
              PreparedStatement ps = con.prepareStatement(sql)) {
-            ps.setInt(1, c.getIdcliente());
-            ps.setString(2, c.getNombre());
-            ps.setString(3, c.getRuc());
-            ps.setString(4, c.getDireccion());
-            ps.setString(5, c.getEmail());
+            ps.setString(1, c.getNombre());
+            ps.setString(2, c.getRuc());
+            ps.setString(3, c.getDireccion());
+            ps.setString(4, c.getEmail());
             ps.executeUpdate();
         } catch (SQLException e) { e.printStackTrace(); }
     }
     @Override
     public List<cliente> listar() {
         List<cliente> clientes = new ArrayList<>();
-        String sql = "SELECT * FROM cliente";
+        String sql = "SELECT * FROM Cliente";
         try (Connection con = conexionDB.conectar(); 
              PreparedStatement ps = con.prepareStatement(sql)) {
             ResultSet rs = ps.executeQuery();
@@ -43,7 +43,7 @@ public class clienteDAOImpl implements clienteDAO {
     }
     @Override
     public void actualizar(cliente c) {
-        String sql = "UPDATE cliente SET nombre=?, ruc=?, direccion=?, email=? WHERE idcliente=?";
+        String sql = "UPDATE Cliente SET nombre=?, ruc=?, direccion=?, email=? WHERE idcliente=?";
         try (Connection con = conexionDB.conectar(); 
              PreparedStatement ps = con.prepareStatement(sql)) {
             ps.setString(1, c.getNombre());
@@ -57,7 +57,7 @@ public class clienteDAOImpl implements clienteDAO {
     @Override
     public void eliminar(cliente c) {
         int idcliente = c.getIdcliente();
-        String sql = "DELETE FROM cliente WHERE idcliente=?";
+        String sql = "DELETE FROM Cliente WHERE idcliente=?";
         try (Connection con = conexionDB.conectar(); 
              PreparedStatement ps = con.prepareStatement(sql)) {
             ps.setInt(1, idcliente);
@@ -67,7 +67,7 @@ public class clienteDAOImpl implements clienteDAO {
     @Override
     public cliente obtenerPorId(int id) {
         cliente c = null;
-        String sql = "SELECT * FROM cliente WHERE idcliente=?";
+        String sql = "SELECT * FROM Cliente WHERE idcliente=?";
         try (Connection con = conexionDB.conectar(); 
              PreparedStatement ps = con.prepareStatement(sql)) {
             ps.setInt(1, id);

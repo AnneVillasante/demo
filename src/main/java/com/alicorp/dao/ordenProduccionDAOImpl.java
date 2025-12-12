@@ -16,21 +16,7 @@ public class ordenProduccionDAOImpl implements ordenProduccionDAO{
             con = conexionDB.conectar();
             con.setAutoCommit(false); // INICIO DE TRANSACCIÓN
 
-            // 1. Insertar el Lote (Se genera primero para obtener su ID)
-            String sqlInsertLote = "INSERT INTO Lote (codigo, fechaFabricacion, fechaVencimiento, estado) VALUES (?, NOW(), ?, ?)";
-            PreparedStatement psLote = con.prepareStatement(sqlInsertLote, Statement.RETURN_GENERATED_KEYS);
-            psLote.setString(1, loteGenerado.getCodigo());
-            psLote.setDate(2, loteGenerado.getFechaVencimiento());
-            psLote.setString(3, loteGenerado.getEstado());
-            psLote.executeUpdate();
-
-            ResultSet rsLoteKeys = psLote.getGeneratedKeys();
-            int idLoteGenerado = 0;
-            if (rsLoteKeys.next()) {
-                idLoteGenerado = rsLoteKeys.getInt(1);
-            }
-
-            // 2. Insertar la Orden de Producción (vinculada al Lote)
+            // 1. Insertar la Orden de Producción PRIMERO (Lote depende de Orden)
             String sqlInsertOrden = "INSERT INTO OrdenProduccion (fechaInicio, idProductoObjetivo, cantidadObjetivo, estado) VALUES (NOW(), ?, ?, ?)";
             PreparedStatement psOrden = con.prepareStatement(sqlInsertOrden, Statement.RETURN_GENERATED_KEYS);
             psOrden.setInt(1, orden.getIdProductoObjetivo());
@@ -38,8 +24,24 @@ public class ordenProduccionDAOImpl implements ordenProduccionDAO{
             psOrden.setString(3, "Finalizada"); // Se asume finalizada al registrar el lote
             psOrden.executeUpdate();
 
-            // 3. Actualizar Stock del Producto (SUMAR)
-            String sqlUpdateStock = "UPDATE producto SET stock = stock + ? WHERE idProducto = ?";
+            // Obtener ID de la Orden generada
+            ResultSet rsOrdenKeys = psOrden.getGeneratedKeys();
+            int idOrdenGenerado = 0;
+            if (rsOrdenKeys.next()) {
+                idOrdenGenerado = rsOrdenKeys.getInt(1);
+            }
+
+            // 2. Insertar el Lote (Vinculado a la Orden)
+            String sqlInsertLote = "INSERT INTO Lote (codigo, fechaFabricacion, fechaVencimiento, estado, idOrden) VALUES (?, NOW(), ?, ?, ?)";
+            PreparedStatement psLote = con.prepareStatement(sqlInsertLote);
+            psLote.setString(1, loteGenerado.getCodigo());
+            psLote.setDate(2, loteGenerado.getFechaVencimiento());
+            psLote.setString(3, loteGenerado.getEstado());
+            psLote.setInt(4, idOrdenGenerado); // FK correcta
+            psLote.executeUpdate();
+
+            // 3. Actualizar Stock del Producto (SUMAR) - Tabla Producto
+            String sqlUpdateStock = "UPDATE Producto SET stock = stock + ? WHERE idProducto = ?";
             PreparedStatement psStock = con.prepareStatement(sqlUpdateStock);
             psStock.setInt(1, orden.getCantidadObjetivo());
             psStock.setInt(2, orden.getIdProductoObjetivo());
@@ -47,7 +49,7 @@ public class ordenProduccionDAOImpl implements ordenProduccionDAO{
 
             // CONFIRMAR TRANSACCIÓN
             con.commit();
-            System.out.println("Producción finalizada y stock actualizado exitosamente. Lote N°: " + idLoteGenerado);
+            System.out.println("Producción finalizada. Orden N°: " + idOrdenGenerado);
 
         } catch (SQLException e) {
             if (con != null) {

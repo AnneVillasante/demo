@@ -15,7 +15,7 @@ public class productoDAOImpl implements productoDAO {
     @Override
     public producto obtenerPorId(int id) {
         producto p = null;
-        String sql = "SELECT * FROM producto WHERE idproducto = ?";
+        String sql = "SELECT * FROM Producto WHERE idproducto = ?";
         try (Connection con = conexionDB.conectar();
              PreparedStatement ps = con.prepareStatement(sql)) {
             ps.setInt(1, id);
@@ -34,7 +34,7 @@ public class productoDAOImpl implements productoDAO {
 
     @Override
     public void actualizarStock(int idproducto, int cantidadVendida) throws Exception {
-        String sql = "UPDATE producto SET stock = stock - ? WHERE idproducto = ?";
+        String sql = "UPDATE Producto SET stock = stock - ? WHERE idproducto = ?";
         try (Connection con = conexionDB.conectar();
              PreparedStatement ps = con.prepareStatement(sql)) {
             ps.setInt(1, cantidadVendida);
