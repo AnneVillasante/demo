@@ -4,8 +4,8 @@ import java.awt.Font;
 
 import javax.swing.UIManager;
 
-import com.alicorp.controller.clienteController;
-import com.alicorp.view.clienteView;
+import com.alicorp.controller.loginController; // NUEVO
+import com.alicorp.view.loginView; // NUEVO
 
 public class Main {
     public static void main(String[] args) {
@@ -15,10 +15,8 @@ public class Main {
         UIManager.put("Button.font", new Font("Arial", Font.BOLD, 14));
         UIManager.put("TextField.font", new Font("Arial", Font.PLAIN, 14));
 
-        // Iniciar la aplicación MVC
-        clienteView vista = new clienteView();
-        clienteController controlador = new clienteController(vista); // El controlador escucha a la vista
-        
-        vista.setVisible(true);
-    }   
+        // Iniciar la aplicación MVC en el Login
+        loginView loginVista = new loginView();
+        new loginController(loginVista); // El controlador escucha a la vista
+    }  
 }
